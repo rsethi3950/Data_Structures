@@ -29,7 +29,25 @@ void insertion_e(int val){
     newnode->right = NULL;
     root=insertion(root, val,newnode);
 }
-
+bst* insertion_it(int val){
+    bst* newnode = new bst;
+    newnode->data = val;
+    newnode->left = NULL;
+    newnode->right = NULL;
+    bst* ptr=root;
+    bst* pre=NULL;
+    if(root == NULL){root=newnode;}
+    else{
+        while(ptr){
+            pre=ptr;
+            if(val<ptr->data){ptr=ptr->left;}
+            else ptr=ptr->right;
+            }
+            if(val<pre->data){pre->left=newnode;}
+            else pre->right=newnode;
+    }
+    return root;
+}
 void preorder(bst* root){
     bst* ptr=root;
     if(ptr == NULL){return;}
@@ -158,6 +176,7 @@ bst* deletion(bst* root, int val){
     }
 }
 int main(){
+    bst* a=NULL;
     insertion_e(15);
     insertion_e(6);
     insertion_e(3);
@@ -168,6 +187,9 @@ int main(){
     insertion_e(4);
     insertion_e(9);
     inorder(root);
+    a=insertion_it(10);
+    cout<<"update a ";
+    inorder(a);
     cout<<"minimum ";
     cout<<mini(root)<<endl;
     cout<<"maximum ";
@@ -186,6 +208,7 @@ int main(){
     del=deletion(root, 3);
     cout<<del->data<<endl;
     inorder(root);
+
 return 0;
 }
 
